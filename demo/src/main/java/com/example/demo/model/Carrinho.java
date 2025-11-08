@@ -13,16 +13,16 @@ import lombok.Data;
 @Table(name = "Carrinho")
 @Data
 public class Carrinho{
+//id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+//alimento
     @ManyToOne
     @JoinColumn(name = "id_alimento", nullable = false)
     private Alimento alimento;
-
+//usuario
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
-
-    
 }

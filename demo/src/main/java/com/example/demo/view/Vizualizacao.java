@@ -1,119 +1,112 @@
 package com.example.demo.view;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.Scanner;
 
-//import com.example.demo.service.UsuarioService;
-
+@Component
 public class Vizualizacao {
 
-  Scanner scanner = new Scanner(System.in);
-  public int entrada;
+    private final Scanner scanner = new Scanner(System.in);
 
-  public Vizualizacao() {
-  }
-/*
- * ================================================
- * Essa classe e inicializada ja usando scanner 
- * os metodos devem ter while ou for para o scanner
- * e mensagem para receber os devidos parametros
- * ================================================
- */
-  public void inicio() {
-    System.out.println("menu inicial");
-    System.out.println("1 - criar\n2 - ver\n3 - atulizar\n4 - deletar\n");
+    @Autowired
+    private UsuarioView usuarioView;
 
-    int entrada = scanner.nextInt(); // lê a linha digitada
-    switch (entrada) {
-      case 1:
-        criar();
-        break;
+    @Autowired
+    private AlimentoView alimentoView;
 
-      default:
-        break;
+    @Autowired
+    private CarrinhoView carrinhoView;
+
+    public void inicio() {
+        while (true) { // Loop infinito do menu principal
+            System.out.println("=== Menu Inicial ===");
+            System.out.println("1 - Criar");
+            System.out.println("2 - Ver");
+            System.out.println("3 - Atualizar");
+            System.out.println("4 - Deletar");
+            System.out.println("5 - Sair");
+            System.out.print("Escolha uma opção: ");
+
+            int opcao = scanner.nextInt();
+            scanner.nextLine(); // limpar buffer
+
+            switch (opcao) {
+                case 1:
+                    criarMenu();
+                    break;
+                case 2:
+                    verMenu();
+                    break;
+                case 3:
+                    System.out.println("Funcionalidade de atualizar ainda não implementada.\n");
+                    break;
+                case 4:
+                    System.out.println("Funcionalidade de deletar ainda não implementada.\n");
+                    break;
+                case 5:
+                    System.out.println("Saindo...");
+                    return;
+                default:
+                    System.out.println("Opção inválida.\n");
+            }
+        }
     }
-  }
 
-  // usar o service
-  public void criar() {
-    switch (entrada) {
-      case 1: // service criar usuario
+    private void criarMenu() {
+        System.out.println("\n=== Criar ===");
+        System.out.println("1 - Criar Usuário");
+        System.out.println("2 - Criar Alimento");
+        System.out.println("3 - Adicionar Alimento ao Carrinho");
+        System.out.println("4 - Voltar");
+        System.out.print("Escolha: ");
 
-        break;
-      case 2: // service criar alimento
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
 
-        break;
-      case 3: // associar alimento a um usuario(cujo criar carrinho)
-
-        break;
-      case 4: // Voltar
-        inicio();
-        break;
-
-      default:
-        break;
+        switch (opcao) {
+            case 1:
+                usuarioView.criarUsuario();
+                break;
+            case 2:
+                alimentoView.criarAlimento();
+                break;
+            case 3:
+                carrinhoView.adicionarAlimentoCarrinho();
+                break;
+            case 4:
+                return;
+            default:
+                System.out.println("Opção inválida.\n");
+        }
     }
-  }
 
-  // usar o service
-  public void ver() {
-    switch (entrada) {
-      case 1: // ver todos usuarios
+    private void verMenu() {
+        System.out.println("\n=== Ver ===");
+        System.out.println("1 - Ver Usuários");
+        System.out.println("2 - Ver Alimentos");
+        System.out.println("3 - Ver Carrinho de Usuário");
+        System.out.println("4 - Voltar");
+        System.out.print("Escolha: ");
 
-        break;
-      case 2: // ver todos alimento
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
 
-        break;
-      case 3: // ver todos alimento de um usuario
-      ver();
-        break;
-      case 4: // Voltar
-        inicio();
-        break;
-
-      default:
-        break;
+        switch (opcao) {
+            case 1:
+                usuarioView.listarUsuarios();
+                break;
+            case 2:
+                alimentoView.listarAlimentos();
+                break;
+            case 3:
+                carrinhoView.listarCarrinho();
+                break;
+            case 4:
+                return;
+            default:
+                System.out.println("Opção inválida.\n");
+        }
     }
-  }
-
-  // usar o service
-  public void atulizar() {
-    switch (entrada) {
-      case 1: // atulizar usuario por id
-
-        break;
-      case 2: // atulizar alimento por id
-
-        break;
-      case 3: // atulizar associacao????
-
-        break;
-      case 4: // Voltar
-        inicio();
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  public void deletar() {
-    switch (entrada) {
-      case 1: // deletar usuario por id
-
-        break;
-      case 2: // deletar alimento por id
-
-        break;
-      case 3: // deletar associcao por id(user e food)
-
-        break;
-      case 4: // Voltar
-        inicio();
-        break;
-
-      default:
-        break;
-    }
-  }
-
 }
