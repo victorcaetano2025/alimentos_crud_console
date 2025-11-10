@@ -36,7 +36,7 @@ public class CarrinhoService {
 
     // Listar todos os alimentos do carrinho de um usuário
     public List<Alimento> meusAlimentos(Long usuarioId) {
-        // ⚠️ Esse método precisa existir no CarrinhoRepository
+        // Esse método precisa existir no CarrinhoRepository
         return carrinhoRepository.findAlimentosByUsuarioId(usuarioId);
     }
 }

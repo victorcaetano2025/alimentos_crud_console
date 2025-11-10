@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.view.Vizualizacao;
+import com.example.demo.view.Visualizacao;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +15,7 @@ public class DemoApplication {
 	
     // 🔹 Bean para iniciar o menu de console após o Spring Boot iniciar
     @Bean
-    public CommandLineRunner run(Vizualizacao vizualizacao) {
+    public CommandLineRunner run(Visualizacao vizualizacao) {
         return args -> vizualizacao.inicio();
     }
 }

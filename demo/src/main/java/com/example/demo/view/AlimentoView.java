@@ -38,7 +38,7 @@ public class AlimentoView {
         alimento.setDataFabricacao(LocalDate.parse(scanner.nextLine()));
 
         alimentoService.salvar(alimento);
-        System.out.println("✅ Alimento salvo com sucesso!\n");
+        System.out.println("Alimento salvo com sucesso!\n");
     }
 
     public void listarAlimentos() {
