@@ -12,10 +12,10 @@ public class DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
-	
-    // 🔹 Bean para iniciar o menu de console após o Spring Boot iniciar
+
+    // 🔹 Executa o menu principal no console após iniciar o Spring Boot
     @Bean
-    public CommandLineRunner run(Visualizacao vizualizacao) {
-        return args -> vizualizacao.inicio();
+    public CommandLineRunner run(Visualizacao visualizacao) {
+        return args -> visualizacao.inicio();
     }
 }

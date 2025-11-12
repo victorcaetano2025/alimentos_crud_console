@@ -22,6 +22,25 @@ public class UsuarioService {
     public List<Usuario> listarTodos(){
         return usuarioRepository.findAll();
     }
+    
+    // 🔹 Atualizar usuário existente
+    public Usuario atualizar(Long id, Usuario novoUsuario) {
+        return usuarioRepository.findById(id)
+                .map(usuarioExistente -> {
+                    usuarioExistente.setNome(novoUsuario.getNome());
+                    usuarioExistente.setIdade(novoUsuario.getIdade());
+                    return usuarioRepository.save(usuarioExistente);
+                })
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + id));
+    }
+
+    // 🔹 Deletar usuário por ID
+    public void deletar(Long id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new RuntimeException("Usuário não encontrado com ID: " + id);
+        }
+        usuarioRepository.deleteById(id);
+    }
 
     
 

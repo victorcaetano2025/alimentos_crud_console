@@ -42,4 +42,26 @@ public class AlimentoService {
     public List<Alimento> buscarPorPerecivel(Boolean perecivel) {
         return alimentoRepository.findByPerecivel(perecivel);
     }
+
+    // 🔹 Atualizar alimento existente
+    public Alimento atualizar(Long id, Alimento novoAlimento) {
+        return alimentoRepository.findById(id)
+                .map(alimentoExistente -> {
+                    alimentoExistente.setNome(novoAlimento.getNome());
+                    alimentoExistente.setCategoria(novoAlimento.getCategoria());
+                    alimentoExistente.setPreco(novoAlimento.getPreco());
+                    alimentoExistente.setDataFabricacao(novoAlimento.getDataFabricacao());
+                    alimentoExistente.setPerecivel(novoAlimento.getPerecivel());
+                    return alimentoRepository.save(alimentoExistente);
+                })
+                .orElseThrow(() -> new RuntimeException("Alimento não encontrado com ID: " + id));
+    }
+
+    // 🔹 Deletar alimento por ID
+    public void deletar(Long id) {
+        if (!alimentoRepository.existsById(id)) {
+            throw new RuntimeException("Alimento não encontrado com ID: " + id);
+        }
+        alimentoRepository.deleteById(id);
+    }
 }
