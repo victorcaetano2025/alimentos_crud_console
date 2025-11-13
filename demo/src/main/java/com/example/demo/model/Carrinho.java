@@ -1,27 +1,21 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "Carrinho")
+@Table(name = "carrinho") // use minúsculo por convenção
 @Data
-public class Carrinho{
-//id
+public class Carrinho {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-//alimento
+    private Long id; // <-- troque para 'id' (minúsculo)
+
     @ManyToOne
     @JoinColumn(name = "id_alimento", nullable = false)
     private Alimento alimento;
-//usuario
+
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;

@@ -2,6 +2,8 @@ package com.example.demo.view;
 
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.CarrinhoService;
+
+import org.antlr.v4.runtime.InputMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,38 +40,49 @@ public class CarrinhoView {
     }
 
     // 🔹 Listar alimentos do carrinho de um usuário
-    public void listarCarrinho() {
-        System.out.println("\n=== Alimentos no Carrinho ===");
-        System.out.print("ID do Usuário: ");
+public void listarCarrinho() {
+    System.out.println("\n=== Alimentos no Carrinho ===");
+    System.out.print("ID do Usuário: ");
 
-        try {
-            Long userId = scanner.nextLong();
-            scanner.nextLine();
+    try {
+        Long userId = scanner.nextLong();
+        scanner.nextLine();
 
-            var usuarioOpt = usuarioRepository.findById(userId);
-            if (usuarioOpt.isEmpty()) {
-                System.out.println("❌ Usuário não encontrado.\n");
-                return;
-            }
-
-            var alimentos = carrinhoService.meusAlimentos(userId);
-            System.out.println("Carrinho de: " + usuarioOpt.get().getNome());
-
-            if (alimentos.isEmpty()) {
-                System.out.println("⚠️ Nenhum alimento no carrinho.\n");
-            } else {
-                alimentos.forEach(a -> System.out.println(
-                        "ID: " + a.getId() +
-                        " | Nome: " + a.getNome() +
-                        " | Categoria: " + a.getCategoria() +
-                        " | Preço: " + a.getPreco()
-                ));
-            }
-        } catch (Exception e) {
-            System.out.println("❌ Erro: " + e.getMessage());
-            scanner.nextLine();
+        var usuarioOpt = usuarioRepository.findById(userId);
+        if (usuarioOpt.isEmpty()) {
+            System.out.println("❌ Usuário não encontrado.\n");
+            return;
         }
+
+        var alimentos = carrinhoService.meusAlimentos(userId);
+        System.out.println("\nCarrinho de: " + usuarioOpt.get().getNome());
+        System.out.println("---------------------------------------");
+
+        if (alimentos.isEmpty()) {
+            System.out.println("⚠️ Nenhum alimento no carrinho.\n");
+        } else {
+            double total = 0.0;
+
+            for (var a : alimentos) {
+                System.out.printf(
+                        "ID: %d | Nome: %s | Categoria: %s | Preço: R$ %.2f%n",
+                        a.getId(), a.getNome(), a.getCategoria(), a.getPreco()
+                );
+                total += a.getPreco(); // soma todos os preços
+            }
+
+            System.out.println("---------------------------------------");
+            System.out.printf("💰 Total do Carrinho: R$ %.2f%n%n", total);
+        }
+    } catch (InputMismatchException e) {
+        System.out.println("⚠️ Digite um número válido para o ID do usuário.");
+        scanner.nextLine();
+    } catch (Exception e) {
+        System.out.println("❌ Erro: " + e.getMessage());
+        scanner.nextLine();
     }
+}
+
 
     // 🔹 Atualizar item do carrinho
     public void atualizarCarrinho() {

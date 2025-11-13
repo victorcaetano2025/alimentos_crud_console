@@ -24,15 +24,27 @@ public class UsuarioService {
     }
     
     // 🔹 Atualizar usuário existente
-    public Usuario atualizar(Long id, Usuario novoUsuario) {
-        return usuarioRepository.findById(id)
-                .map(usuarioExistente -> {
-                    usuarioExistente.setNome(novoUsuario.getNome());
-                    usuarioExistente.setIdade(novoUsuario.getIdade());
-                    return usuarioRepository.save(usuarioExistente);
-                })
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + id));
+  public Usuario atualizar(Long id, Usuario novoUsuario) {
+    if (novoUsuario == null) {
+        throw new RuntimeException("Objeto novoUsuario é nulo");
     }
+
+    return usuarioRepository.findById(id)
+            .map(usuarioExistente -> {
+                if (novoUsuario.getNome() == null || novoUsuario.getNome().isBlank()) {
+                    throw new RuntimeException("Nome inválido");
+                }
+                if (novoUsuario.getIdade() <= 0) {
+                    throw new RuntimeException("Idade inválida");
+                }
+
+                usuarioExistente.setNome(novoUsuario.getNome());
+                usuarioExistente.setIdade(novoUsuario.getIdade());
+                return usuarioRepository.save(usuarioExistente);
+            })
+            .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + id));
+}
+
 
     // 🔹 Deletar usuário por ID
     public void deletar(Long id) {
