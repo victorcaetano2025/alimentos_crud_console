@@ -23,19 +23,9 @@ public class AlimentoService {
         return alimentoRepository.findAll();
     }
 
-// Buscar por categoria
-    public List<Alimento> buscarPorCategoria(String categoria) {
-        return alimentoRepository.findByCategoriaIgnoreCase(categoria);
-    }
-
 // Buscar por faixa de preço
     public List<Alimento> buscarPorPrecoEntre(double precoMin, double precoMax) {
         return alimentoRepository.findByPrecoBetween(precoMin, precoMax);
-    }
-
-// Buscar por perecibilidade
-    public List<Alimento> buscarPorPerecivel(Boolean perecivel) {
-        return alimentoRepository.findByPerecivel(perecivel);
     }
 
     // 🔹 Atualizar alimento existente

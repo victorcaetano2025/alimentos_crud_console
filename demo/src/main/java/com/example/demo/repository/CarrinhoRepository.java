@@ -13,7 +13,4 @@ public interface CarrinhoRepository extends JpaRepository<Carrinho, Long> {
     // 🔹 Lista todos os alimentos de um usuário
     @Query("SELECT c.alimento FROM Carrinho c WHERE c.usuario.id = :usuarioId")
     List<Alimento> findAlimentosByUsuarioId(@Param("usuarioId") Long usuarioId);
-
-    // 🔹 Lista todos os carrinhos que contêm determinado alimento
-    List<Carrinho> findByAlimentoId(Long alimentoId);
 }

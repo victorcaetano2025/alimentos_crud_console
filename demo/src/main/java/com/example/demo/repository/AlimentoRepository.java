@@ -8,9 +8,6 @@ import java.util.List;
 @Repository
 public interface AlimentoRepository extends JpaRepository<Alimento, Long> {
 
-    // 🔹 Buscar alimentos por parte do nome (case insensitive)
-    List<Alimento> findByNomeContainingIgnoreCase(String nome);
-
     // 🔹 Buscar alimentos por categoria
     List<Alimento> findByCategoriaIgnoreCase(String categoria);
 

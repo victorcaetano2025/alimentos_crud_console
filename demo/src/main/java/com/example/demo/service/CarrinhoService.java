@@ -66,19 +66,4 @@ public class CarrinhoService {
         }
         carrinhoRepository.deleteById(carrinhoId);
     }
-
-    // 🔹 Deletar todos os itens do carrinho de um usuário (opcional)
-    public void deletarPorUsuario(Long usuarioId) {
-        List<Alimento> alimentos = carrinhoRepository.findAlimentosByUsuarioId(usuarioId);
-        if (alimentos.isEmpty()) {
-            throw new RuntimeException("Nenhum item encontrado no carrinho do usuário ID: " + usuarioId);
-        }
-
-        List<Carrinho> carrinhos = carrinhoRepository.findAll()
-                .stream()
-                .filter(c -> c.getUsuario().getId().equals(usuarioId))
-                .toList();
-
-        carrinhoRepository.deleteAll(carrinhos);
-    }
 }
