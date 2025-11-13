@@ -50,7 +50,7 @@ public void listarCarrinho() {
 
         var usuarioOpt = usuarioRepository.findById(userId);
         if (usuarioOpt.isEmpty()) {
-            System.out.println("❌ Usuário não encontrado.\n");
+            System.out.println("Usuário não encontrado.\n");
             return;
         }
 
@@ -59,7 +59,7 @@ public void listarCarrinho() {
         System.out.println("---------------------------------------");
 
         if (alimentos.isEmpty()) {
-            System.out.println("⚠️ Nenhum alimento no carrinho.\n");
+            System.out.println("Nenhum alimento no carrinho.\n");
         } else {
             double total = 0.0;
 
@@ -75,10 +75,10 @@ public void listarCarrinho() {
             System.out.printf("💰 Total do Carrinho: R$ %.2f%n%n", total);
         }
     } catch (InputMismatchException e) {
-        System.out.println("⚠️ Digite um número válido para o ID do usuário.");
+        System.out.println("Digite um número válido para o ID do usuário.");
         scanner.nextLine();
     } catch (Exception e) {
-        System.out.println("❌ Erro: " + e.getMessage());
+        System.out.println("Erro: " + e.getMessage());
         scanner.nextLine();
     }
 }
@@ -103,9 +103,9 @@ public void listarCarrinho() {
                 novoUserId == 0 ? null : novoUserId,
                 novoAlimentoId == 0 ? null : novoAlimentoId
             );
-            System.out.println("✅ Carrinho atualizado com sucesso!\n");
+            System.out.println(" Carrinho atualizado com sucesso!\n");
         } catch (Exception e) {
-            System.out.println("❌ Erro ao atualizar carrinho: " + e.getMessage());
+            System.out.println(" Erro ao atualizar carrinho: " + e.getMessage());
         }
     }
 
@@ -118,9 +118,9 @@ public void listarCarrinho() {
 
         try {
             carrinhoService.deletar(id);
-            System.out.println("✅ Item removido do carrinho!\n");
+            System.out.println(" Item removido do carrinho!\n");
         } catch (Exception e) {
-            System.out.println("❌ Erro: " + e.getMessage());
+            System.out.println(" Erro: " + e.getMessage());
         }
     }
 }

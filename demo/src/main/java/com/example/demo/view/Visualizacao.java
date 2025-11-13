@@ -155,7 +155,7 @@ public class Visualizacao {
             // As próprias views já mostram mensagens, então aqui só confirmamos
             System.out.println("(✔) Ação '" + descricao + "' concluída.\n");
         } catch (Exception e) {
-            System.err.println("❌ Erro ao executar " + descricao + ": " + e.getMessage());
+            System.err.println("Erro ao executar " + descricao + ": " + e.getMessage());
         }
     }
 }

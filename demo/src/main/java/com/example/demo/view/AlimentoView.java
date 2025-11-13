@@ -47,7 +47,7 @@ public class AlimentoView {
         alimento.setDataFabricacao(LocalDate.parse(scanner.nextLine()));
 
         alimentoService.salvar(alimento);
-        System.out.println("✅ Alimento cadastrado com sucesso!\n");
+        System.out.println("Alimento cadastrado com sucesso!\n");
     }
 
     // 🔹 Listar todos
@@ -126,9 +126,9 @@ public class AlimentoView {
 
         try {
             alimentoService.atualizar(id, novo);
-            System.out.println("✅ Alimento atualizado com sucesso!\n");
+            System.out.println("Alimento atualizado com sucesso!\n");
         } catch (Exception e) {
-            System.out.println("❌ Erro: " + e.getMessage());
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
@@ -141,9 +141,9 @@ public class AlimentoView {
 
         try {
             alimentoService.deletar(id);
-            System.out.println("✅ Alimento deletado com sucesso!\n");
+            System.out.println("Alimento deletado com sucesso!\n");
         } catch (Exception e) {
-            System.out.println("❌ Erro ao deletar: " + e.getMessage());
+            System.out.println("Erro ao deletar: " + e.getMessage());
         }
     }
 

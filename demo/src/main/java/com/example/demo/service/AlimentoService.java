@@ -28,11 +28,6 @@ public class AlimentoService {
         return alimentoRepository.findByCategoriaIgnoreCase(categoria);
     }
 
-// Buscar por nome (contém parte do texto)
-    public List<Alimento> buscarPorNome(String nome) {
-        return alimentoRepository.findByNomeContainingIgnoreCase(nome);
-    }
-
 // Buscar por faixa de preço
     public List<Alimento> buscarPorPrecoEntre(double precoMin, double precoMax) {
         return alimentoRepository.findByPrecoBetween(precoMin, precoMax);

@@ -29,7 +29,7 @@ public class UsuarioView {
         scanner.nextLine();
 
         usuarioService.salvar(usuario);
-        System.out.println("✅ Usuário cadastrado com sucesso!\n");
+        System.out.println("Usuário cadastrado com sucesso!\n");
     }
 
     // 🔹 Listar todos
@@ -64,9 +64,9 @@ public class UsuarioView {
 
         try {
             usuarioService.atualizar(id, novo);
-            System.out.println("✅ Usuário atualizado com sucesso!\n");
+            System.out.println("Usuário atualizado com sucesso!\n");
         } catch (Exception e) {
-            System.out.println("❌ Erro: " + e.getMessage());
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
@@ -79,9 +79,9 @@ public class UsuarioView {
 
         try {
             usuarioService.deletar(id);
-            System.out.println("✅ Usuário deletado com sucesso!\n");
+            System.out.println("Usuário deletado com sucesso!\n");
         } catch (Exception e) {
-            System.out.println("❌ Erro ao deletar: " + e.getMessage());
+            System.out.println("Erro ao deletar: " + e.getMessage());
         }
     }
 }
