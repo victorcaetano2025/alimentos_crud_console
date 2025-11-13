@@ -78,8 +78,9 @@ public class Visualizacao {
         System.out.println("\n--- Ver ---");
         System.out.println("1 - Ver Usuários");
         System.out.println("2 - Ver Alimentos");
-        System.out.println("3 - Ver Carrinho de Usuário");
-        System.out.println("4 - Voltar");
+        System.out.println("3 - Ver Alimentos por faixa de preço");
+        System.out.println("4 - Ver Carrinho de Usuário");
+        System.out.println("5 - Voltar");
         System.out.println("----------------");
 
         int opcao = lerOpcao("Escolha: ");
@@ -87,8 +88,9 @@ public class Visualizacao {
         switch (opcao) {
             case 1 -> executarAcao("listar usuários", usuarioView::listarUsuarios);
             case 2 -> executarAcao("listar alimentos", alimentoView::listarAlimentos);
-            case 3 -> executarAcao("listar carrinho", carrinhoView::listarCarrinho);
-            case 4 -> System.out.println("Voltando ao menu principal...\n");
+            case 3 -> executarAcao("listar alimentos por faixa de preço", alimentoView::listarPorFaixaDePreco);
+            case 4 -> executarAcao("listar carrinho", carrinhoView::listarCarrinho);
+            case 5 -> System.out.println("Voltando ao menu principal...\n");
             default -> System.out.println("Opção inválida!\n");
         }
     }

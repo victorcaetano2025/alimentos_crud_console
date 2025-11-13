@@ -29,11 +29,19 @@ public class AlimentoView {
         alimento.setCategoria(scanner.nextLine());
 
         System.out.print("Preço: ");
+        while (!scanner.hasNextDouble()) {
+            System.out.print("Valor inválido! Digite um número: ");
+            scanner.next();
+        }
         alimento.setPreco(scanner.nextDouble());
 
         System.out.print("Perecível (true/false): ");
+        while (!scanner.hasNextBoolean()) {
+            System.out.print("Valor inválido! Digite true ou false: ");
+            scanner.next();
+        }
         alimento.setPerecivel(scanner.nextBoolean());
-        scanner.nextLine();
+        scanner.nextLine(); // limpa o buffer
 
         System.out.print("Data de fabricação (AAAA-MM-DD): ");
         alimento.setDataFabricacao(LocalDate.parse(scanner.nextLine()));
@@ -50,19 +58,41 @@ public class AlimentoView {
         if (alimentos.isEmpty()) {
             System.out.println("Nenhum alimento cadastrado.\n");
         } else {
-            alimentos.forEach(a -> System.out.println(
-                    "ID: " + a.getId() +
-                    " | Nome: " + a.getNome() +
-                    " | Categoria: " + a.getCategoria() +
-                    " | Preço: " + a.getPreco() +
-                    " | Perecível: " + a.getPerecivel() +
-                    " | Data: " + a.getDataFabricacao()
-            ));
+            alimentos.forEach(this::exibirAlimento);
         }
         System.out.println();
     }
 
-    // 🔹 Atualizar alimento (sem buscarPorId)
+    // 🔹 Listar alimentos por faixa de preço (Min < alimento < Max)
+    public void listarPorFaixaDePreco() {
+        System.out.println("\n=== Buscar Alimentos por Faixa de Preço ===");
+        System.out.print("Preço mínimo: ");
+        while (!scanner.hasNextDouble()) {
+            System.out.print("Valor inválido! Digite um número: ");
+            scanner.next();
+        }
+        double precoMin = scanner.nextDouble();
+
+        System.out.print("Preço máximo: ");
+        while (!scanner.hasNextDouble()) {
+            System.out.print("Valor inválido! Digite um número: ");
+            scanner.next();
+        }
+        double precoMax = scanner.nextDouble();
+        scanner.nextLine(); // limpar buffer
+
+        List<Alimento> alimentos = alimentoService.buscarPorPrecoEntre(precoMin, precoMax);
+
+        if (alimentos.isEmpty()) {
+            System.out.println("Nenhum alimento encontrado entre R$ " + precoMin + " e R$ " + precoMax + ".\n");
+        } else {
+            System.out.println("\nAlimentos com preço entre R$ " + precoMin + " e R$ " + precoMax + ":");
+            alimentos.forEach(this::exibirAlimento);
+        }
+        System.out.println();
+    }
+
+    // 🔹 Atualizar alimento
     public void atualizarAlimento() {
         System.out.println("\n=== Atualizar Alimento ===");
         System.out.print("Digite o ID do alimento a atualizar: ");
@@ -77,9 +107,17 @@ public class AlimentoView {
         novo.setCategoria(scanner.nextLine());
 
         System.out.print("Novo preço: ");
+        while (!scanner.hasNextDouble()) {
+            System.out.print("Valor inválido! Digite um número: ");
+            scanner.next();
+        }
         novo.setPreco(scanner.nextDouble());
 
         System.out.print("Perecível (true/false): ");
+        while (!scanner.hasNextBoolean()) {
+            System.out.print("Valor inválido! Digite true ou false: ");
+            scanner.next();
+        }
         novo.setPerecivel(scanner.nextBoolean());
         scanner.nextLine();
 
@@ -94,7 +132,7 @@ public class AlimentoView {
         }
     }
 
-    // 🔹 Deletar alimento (sem buscarPorId)
+    // 🔹 Deletar alimento
     public void deletarAlimento() {
         System.out.println("\n=== Deletar Alimento ===");
         System.out.print("Digite o ID do alimento a deletar: ");
@@ -107,5 +145,11 @@ public class AlimentoView {
         } catch (Exception e) {
             System.out.println("❌ Erro ao deletar: " + e.getMessage());
         }
+    }
+
+    // 🔹 Método auxiliar para exibir alimento formatado
+    private void exibirAlimento(Alimento a) {
+        System.out.printf("ID: %d | Nome: %s | Categoria: %s | Preço: R$ %.2f | Perecível: %s | Data: %s%n",
+                a.getId(), a.getNome(), a.getCategoria(), a.getPreco(), a.getPerecivel(), a.getDataFabricacao());
     }
 }
